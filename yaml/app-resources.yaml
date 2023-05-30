@@ -1,0 +1,18 @@
+#  create pod 'app-resources' to run container 'app' with image 'gcr.io/k8s-k3s-387907/demo:v2.0.0' and expose port 8080, add resources Memory with 128mi requests and 256mi limits, add resources CPU with 100m requests and 100m limits
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-resources
+spec:
+  containers:
+  - name: app
+    image: gcr.io/k8s-k3s-387907/demo:v2.0.0
+    ports:
+    - containerPort: 8080
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 256Mi

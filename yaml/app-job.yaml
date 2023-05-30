@@ -1,0 +1,18 @@
+#Create job with name 'app-job', add image 'busybox', add command for container 'while true; do { echo -e 'HTTP/1.1 200 OK\n\n Version: 1.0.0'; } | nc -vlp 8080; done', add job backoffLimit 4
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: app-job
+        image: busybox
+        command:
+        - sh
+        - -c
+        - while true; do { echo -e 'HTTP/1.1 200 OK\n\n Version: 1.0.0'; } | nc -vlp 8080; done
+      restartPolicy: OnFailure
+  backoffLimit: 4

@@ -1,0 +1,19 @@
+#  create pod 'app-volume' in namespace 'demo' to run image 'gcr.io/k8s-k3s-387907/demo:v2.0.0', expose port 8080, add persistent volume 'data', add volumes hostPath '/var/lib/app'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-volume
+  namespace: demo
+spec:
+  containers:
+  - name: app-volume
+    image: gcr.io/k8s-k3s-387907/demo:v2.0.0
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - name: data
+      mountPath: /var/lib/app
+  volumes:
+  - name: data
+    hostPath:
+      path: /var/lib/app

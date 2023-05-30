@@ -1,0 +1,28 @@
+#create pod 'app-readiness' in namespace 'demo' to run image 'gcr.io/k8s-k3s-387907/demo:v2.0.0' on port 8080 with livenessProbe (delay 3 sec, timeout 1 sec, period 10 sec, failure 3) by port 8000 and with livenessProbe (period 2 sec, delay 0, failure 3, success 1)) by port 8000
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-readiness
+  namespace: demo
+spec:
+  containers:
+  - name: app-readiness
+    image: gcr.io/k8s-k3s-387907/demo:v2.0.0
+    ports:
+    - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8000
+      initialDelaySeconds: 3
+      timeoutSeconds: 1
+      periodSeconds: 10
+      failureThreshold: 3
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8000
+      periodSeconds: 2
+      initialDelaySeconds: 0
+      failureThreshold: 3
+      successThreshold: 1

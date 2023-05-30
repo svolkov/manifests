@@ -1,0 +1,25 @@
+#Create pod with name 'app-multi-containers', add volumes 'html', add volumeMounts for container1 with mountPath '/usr/share/nginx/html',  add volumeMounts for debian container2  with mountPath '/html', for container2 add command '/bin/sh -c 'while true; do date >> /html/index.html; sleep 1; done''
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-multi-containers
+spec:
+  containers:
+  - name: container1
+    image: nginx
+    volumeMounts:
+    - name: html
+      mountPath: /usr/share/nginx/html
+  - name: container2
+    image: debian
+    command:
+    - "/bin/sh"
+    - "-c"
+    - "while true; do date >> /html/index.html; sleep 1; done"
+    volumeMounts:
+    - name: html
+      mountPath: /html
+  volumes:
+  - name: html
+    emptyDir: {}
