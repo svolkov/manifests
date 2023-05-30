@@ -1,4 +1,4 @@
-#Create cronejob with name 'app-cronejob' to execute daily at 22:00, Create cronejob with name 'app-cronejob' to execute daily at 22:00
+#Create cronejob with name 'app-cronjob' to execute daily at 22:00, Create cronejob with name 'app-cronjob' to execute daily at 22:00
 
 apiVersion: batch/v1beta1
 kind: CronJob
